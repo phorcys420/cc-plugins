@@ -1,4 +1,3 @@
-import { logger } from "@cumcord/utils";
 import { showToast } from "./util";
 
 export async function getPlugins() {
@@ -19,7 +18,7 @@ export async function getPlugins() {
     return plugins;
 }
 
-export async function loadPlugins(plugins) {
+export async function loadPlugins(plugins, showToast = showToast) {
     for(let plugin of plugins) {
         if(plugin.settings) {
             await cumcord.modules.internal.idbKeyval.set(`${plugin.url}_CUMCORD_STORE`, plugin.settings);
@@ -29,7 +28,7 @@ export async function loadPlugins(plugins) {
             try {
                 await cumcord.plugins.importPlugin(plugin.url);
             } catch(e) {
-                logger.error("[PrematureEjaculator]", "Could not load plugin", plugin.url, e);
+                cumcord.utils.logger.error("[PrematureEjaculator]", "Could not load plugin", plugin.url, e);
                 showToast({message: `Could not load ${plugin.url}, check the console.`, id: plugin.url, type: 2});
             }
 
@@ -40,7 +39,7 @@ export async function loadPlugins(plugins) {
                 cumcord.plugins.togglePlugin(plugin.url);
                 cumcord.plugins.togglePlugin(plugin.url);
             } catch(e) {
-                logger.error("[PrematureEjaculator]", "Could not reload plugin", plugin.url, e);
+                cumcord.utils.logger.error("[PrematureEjaculator]", "Could not reload plugin", plugin.url, e);
                 showToast({message: `Could not reload ${plugin.url}, check the console.`, id: plugin.url, type: 2});
             }
         }
@@ -49,7 +48,8 @@ export async function loadPlugins(plugins) {
     // Reload window for idb changes to take effect
     //window.location.reload();
 }
-
+//§ 
 export function makeSnippet(plugins) {
-    return `(${loadPlugins})(${JSON.stringify(plugins)})`;
+    // kinda ugly but the only workaround I found to the fact that showToast is non-existant if you only have the function above's code
+    return `(${loadPlugins})(${JSON.stringify(plugins)}, cumcord.modules.webpack.findByProps("showToast").showToast)`;
 }
