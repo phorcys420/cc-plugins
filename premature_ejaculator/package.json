@@ -1,7 +1,7 @@
 {
   "name": "premature_ejaculator",
   "version": "1.0.0",
-  "description": "Allows you to export settings for quickly loading them into a new CC install.",
+  "description": "Allows you to export settings for quickly loading them into a new CC install",
 
   "main": "src/index.js",
 

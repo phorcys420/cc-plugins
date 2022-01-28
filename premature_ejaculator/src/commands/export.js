@@ -1,4 +1,4 @@
-import { getPlugins, loadPlugins } from "../lib/plugins"
+import { getPlugins, makeSnippet } from "../lib/plugins";
 
 export default {
     name: "export",
@@ -24,8 +24,7 @@ export default {
         let plugins = await getPlugins();
 
         if(ctx.args.snippet) {
-            // LMAOOOOOOOOOOOOOOOOOOOOOOOOOO
-            let snippet = `(${loadPlugins})(${JSON.stringify(plugins)})`;
+            let snippet = makeSnippet(plugins);
 
             if(ctx.args.ugly) snippet += "\n// mean :(";
 

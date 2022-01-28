@@ -1,3 +1,6 @@
+import { logger } from "@cumcord/utils";
+import { showToast } from "./util";
+
 export async function getPlugins() {
     let plugins = [];
 
@@ -23,16 +26,30 @@ export async function loadPlugins(plugins) {
         }
 
         if(!cumcord.plugins.installed.ghost[plugin.url]) {
-            await cumcord.plugins.importPlugin(plugin.url);
+            try {
+                await cumcord.plugins.importPlugin(plugin.url);
+            } catch(e) {
+                logger.error("[PrematureEjaculator]", "Could not load plugin", plugin.url, e);
+                showToast({message: `Could not load ${plugin.url}, check the console.`, id: plugin.url, type: 2});
+            }
 
             if(plugin.enabled == false) cumcord.plugins.togglePlugin(plugin.url);
         } else {
             // Reload plugin for idb changes to take effect
-            cumcord.plugins.togglePlugin(plugin.url);
-            cumcord.plugins.togglePlugin(plugin.url);
+            try {
+                cumcord.plugins.togglePlugin(plugin.url);
+                cumcord.plugins.togglePlugin(plugin.url);
+            } catch(e) {
+                logger.error("[PrematureEjaculator]", "Could not reload plugin", plugin.url, e);
+                showToast({message: `Could not reload ${plugin.url}, check the console.`, id: plugin.url, type: 2});
+            }
         }
     }
 
     // Reload window for idb changes to take effect
     //window.location.reload();
+}
+
+export function makeSnippet(plugins) {
+    return `(${loadPlugins})(${JSON.stringify(plugins)})`;
 }

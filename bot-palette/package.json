@@ -1,7 +1,11 @@
 {
-  "name": "Premature Ejaculator",
+  "name": "bot_palette",
+  "version": "1.0.0",
   "description": "Allows you to export settings for quickly loading them into a new CC install",
+
+  "main": "src/index.js",
+
   "author": "Phorcys",
-  "file": "src/index.js",
-  "license": "CC0-1.0"
+  "license": "CC0-1.0",
+  "keywords": []
 }

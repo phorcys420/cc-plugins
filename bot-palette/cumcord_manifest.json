@@ -1,0 +1,7 @@
+{
+  "name": "Bot palette",
+  "description": "Adds slash commands to Yellowsink's command palette",
+  "author": "Phorcys",
+  "file": "src/index.js",
+  "license": "CC0-1.0"
+}
