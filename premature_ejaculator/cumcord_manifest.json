@@ -1,0 +1,7 @@
+{
+  "name": "Premature Ejaculator",
+  "description": "Allows you to export settings for quickly loading them into a new CC install.",
+  "author": "Phorcys",
+  "file": "src/index.js",
+  "license": "CC0-1.0"
+}

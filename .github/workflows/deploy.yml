@@ -49,7 +49,7 @@ jobs:
             - name: Deploy to GitHub Pages
               uses: peaceiris/actions-gh-pages@v3
               with:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
                   publish_dir: ./.dist
                   # Makes it so the md files in the previous step get processed by GitHub Pages
                   enable_jekyll: true
@@ -57,4 +57,4 @@ jobs:
                   # This creates the CNAME file required to host github pages on a custom domain
                   # Remove this to use default [username].github.io domain
                   # Reminder: using a free domain service like freenom *can* result in your users getting hacked
-                  cname: cc.remty.xyz
+                  # cname: cc.phorcys.net
