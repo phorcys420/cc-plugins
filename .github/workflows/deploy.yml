@@ -30,6 +30,7 @@ jobs:
                   for plugin in */
                   do
                     cd "$plugin"
+                    pnpm i
                     sperm build --outdir "../.dist/$plugin"
                     cd ..
                   done
