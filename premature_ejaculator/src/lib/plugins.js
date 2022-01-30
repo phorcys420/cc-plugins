@@ -1,4 +1,4 @@
-import { showToast } from "./util";
+import { showToast as utilShowToast } from "./util";
 
 export async function getPlugins() {
     let plugins = [];
@@ -18,7 +18,7 @@ export async function getPlugins() {
     return plugins;
 }
 
-export async function loadPlugins(plugins, showToast = showToast) {
+export async function loadPlugins(plugins, showToast = utilShowToast) {
     for(let plugin of plugins) {
         if(plugin.settings) {
             await cumcord.modules.internal.idbKeyval.set(`${plugin.url}_CUMCORD_STORE`, plugin.settings);
@@ -48,8 +48,11 @@ export async function loadPlugins(plugins, showToast = showToast) {
     // Reload window for idb changes to take effect
     //window.location.reload();
 }
-//§ 
+
 export function makeSnippet(plugins) {
-    // kinda ugly but the only workaround I found to the fact that showToast is non-existant if you only have the function above's code
+    /*
+        kinda ugly but the only workaround I found to the fact that showToast is non-existant if you only have the function above's code
+        and yes i am casting a function into a string
+    */
     return `(${loadPlugins})(${JSON.stringify(plugins)}, cumcord.modules.webpack.findByProps("showToast").showToast)`;
 }

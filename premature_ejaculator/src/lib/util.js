@@ -10,8 +10,8 @@ export async function copyText(text) {
         try {
             await navigator.clipboard.writeText(text);
         } catch(e) {
-            showToast({message: "Could not copy to clipboard ! :(", id: "clipboard_error", type: 2});
             logger.error("[PrematureEjaculator]", "Could not copy text", e);
+            showToast({message: "Could not copy to clipboard! :(", id: "clipboard_error", type: 2});
         }
     }
 }
