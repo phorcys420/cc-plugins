@@ -1,0 +1,7 @@
+{
+  "name": "CrossChat",
+  "description": "Turns you into Lea from CrossCode",
+  "author": "Phorcys",
+  "file": "src/index.jsx",
+  "license": "CC0-1.0"
+}
